@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: approval_service
+    depends_on:
+      - db
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: approval_service
+    ports:
+      - "5432:5432"
